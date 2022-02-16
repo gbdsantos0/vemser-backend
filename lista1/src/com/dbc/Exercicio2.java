@@ -7,10 +7,10 @@ public class Exercicio2 {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         sc.useLocale(Locale.ENGLISH);
-        float nota1;
-        float nota2;
-        float nota3;
-        float nota4;
+        float nota1, nota2, nota3, nota4;
+//        float nota2;
+//        float nota3;
+//        float nota4;
         float notaFinal;
 
         System.out.println("Digite suas quatro notas separadas por espaço: ");
