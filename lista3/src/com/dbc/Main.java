@@ -19,7 +19,7 @@ public class Main {
 
         Endereco[] enderecos = new Endereco[2];
         enderecos[0] = endereco;
-        enderecos[1] = new Endereco(1,"Jacob Rheingantz", 185, "Casa", "96170-000", "Sao Lourenco do Sul", "RS", "Brasil");
+        //enderecos[1] = new Endereco(1,"Jacob Rheingantz", 185, "Casa", "96170-000", "Sao Lourenco do Sul", "RS", "Brasil");
 
         System.out.println("##############################################################");
 
