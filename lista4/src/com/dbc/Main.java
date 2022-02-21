@@ -45,12 +45,16 @@ public class Main {
 
         ContaCorrente contaCorrente = new ContaCorrente(cliente,"123456",123);
 
-        //conta 2 com o mesmo cliente para testes
-        ContaCorrente contaCorrente2 = new ContaCorrente(cliente,"999999",888);
+        contaCorrente.imprimir();
 
+        System.out.println("##############################################################");
+        System.out.println("###CONTA POUPANCA 1###");
 
+        ContaPoupanca contaPoupanca = new ContaPoupanca(cliente,"999999",888);
+
+        contaPoupanca.imprimir();
         //impressao da conta corrente
-        contaCorrente.imprimirContaCorrente();
+
         System.out.println("##############################################################");
         System.out.println("###SAQUE DE 1100 SEM SALDO###");
         //tentativa falha de sacar
@@ -59,7 +63,10 @@ public class Main {
         }else{
             System.out.println("Sem saldo.");
         }
-        contaCorrente.imprimirContaCorrente();
+
+        System.out.println();
+
+        contaCorrente.imprimir();
         System.out.println("##############################################################");
         System.out.println("###DEPOSITO DE 1000###");
         //deposito
@@ -68,7 +75,10 @@ public class Main {
         }else{
             System.out.println("Falha no deposito.");
         }
-        contaCorrente.imprimirContaCorrente();
+
+        System.out.println();
+
+        contaCorrente.imprimir();
         System.out.println("##############################################################");
         System.out.println("###SAQUE DE 100###");
         //tentativa com sucesso
@@ -77,8 +87,13 @@ public class Main {
         }else{
             System.out.println("Sem saldo.");
         }
-        contaCorrente.imprimirContaCorrente();
+
+        System.out.println();
+
+        contaCorrente.imprimir();
         System.out.println("##############################################################");
+
+
         System.out.println("###SAQUE DE 1000, COM USO DO CHEQUE ESPECIAL###");
         //saque cheque especial(resultado 900 no especial)
         if(contaCorrente.sacar(1000)){
@@ -86,39 +101,54 @@ public class Main {
         }else{
             System.out.println("Sem saldo.");
         }
-        contaCorrente.imprimirContaCorrente();
+        contaCorrente.imprimir();
         System.out.println("##############################################################");
         System.out.println("###TRANSFERENCIA DE 800 DA CONTA 1 PARA A CONTA 2###");
 
         //transferencia
-        contaCorrente2.imprimirContaCorrente();
+
+        contaCorrente.imprimir();
         System.out.println();
-        if(contaCorrente.transferir(contaCorrente2,800)){
+
+        contaPoupanca.imprimir();
+        System.out.println();
+        if(contaCorrente.transferir(contaPoupanca,800)){
             System.out.println("Transferencia realizada com sucesso");
         }else{
             System.out.println("Sem saldo para transferencia");
         }
 
         System.out.println();
-        contaCorrente2.imprimirContaCorrente();
+        contaCorrente.imprimir();
+
         System.out.println();
-        contaCorrente.imprimirContaCorrente();
+        contaPoupanca.imprimir();
+
         System.out.println("##############################################################");
         System.out.println("###TRANSFERENCIA FALHA DE 800 DA CONTA 1 PARA A CONTA 2###");
 
         //transferencia
-        contaCorrente2.imprimirContaCorrente();
+
+        contaCorrente.imprimir();
         System.out.println();
-        if(contaCorrente.transferir(contaCorrente2,800)){
+
+        contaPoupanca.imprimir();
+        System.out.println();
+        if(contaCorrente.transferir(contaPoupanca,800)){
             System.out.println("Transferencia realizada com sucesso");
         }else{
             System.out.println("Sem saldo para transferencia");
         }
 
         System.out.println();
-        contaCorrente2.imprimirContaCorrente();
+        contaCorrente.imprimir();
+
         System.out.println();
-        contaCorrente.imprimirContaCorrente();
+        contaPoupanca.imprimir();
         System.out.println("##############################################################");
+        System.out.println("###CREDITAR TAXA CONTA POUPANCA 1###");
+
+        contaPoupanca.creditarTaxa();
+        contaPoupanca.imprimir();
     }
 }
