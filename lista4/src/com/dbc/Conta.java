@@ -38,7 +38,7 @@ public abstract class Conta implements Movimentacao{
     }
 
     public boolean transferir(Conta contaParaTransferir, double valorParaTransferir){
-        if(valorParaTransferir>0){
+        if(valorParaTransferir>0){//redundante
             //se saque for efetuado com sucesso, pode depositar na outra conta
             if(this.sacar(valorParaTransferir)){
                 contaParaTransferir.depositar(valorParaTransferir);

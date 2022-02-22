@@ -11,15 +11,15 @@ public class ContaPoupanca extends Conta implements Impressao{
     }
 
     public void creditarTaxa(){
-        setSaldo(getSaldo()*JUROS_MENSAL);
+        super.setSaldo(super.getSaldo()*JUROS_MENSAL);
     }
 
     @Override
     public void imprimir() {
         DecimalFormat df = new DecimalFormat("0.00");
         System.out.println("Informações da conta do cliente: ");
-        this.getCliente().imprimirCliente();
-        System.out.println("Agência: "+this.getAgencia()+" Conta: "+this.getNumeroConta());
-        System.out.println("Saldo: "+df.format(this.getSaldo()));
+        super.getCliente().imprimirCliente();
+        System.out.println("Agência: "+super.getAgencia()+" Conta: "+super.getNumeroConta());
+        System.out.println("Saldo: "+df.format(super.getSaldo()));
     }
 }

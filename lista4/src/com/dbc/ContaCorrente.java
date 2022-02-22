@@ -14,10 +14,10 @@ public class ContaCorrente extends Conta implements Impressao{
     public boolean sacar(double valorParaSacar){
         if(valorParaSacar>0){
             //valor maior do que o disponível
-            if(valorParaSacar>retornarSaldoComChequeEspecial()){
+            if(valorParaSacar>this.retornarSaldoComChequeEspecial()){
                 return false;
             }
-            this.setSaldo(this.getSaldo()-valorParaSacar);
+            super.setSaldo(super.getSaldo()-valorParaSacar);
             return true;
         }
         //valor menor ou igual a 0
@@ -25,7 +25,7 @@ public class ContaCorrente extends Conta implements Impressao{
     }
 
     public double retornarSaldoComChequeEspecial(){
-        return this.getSaldo()+this.chequeEspecial;//getChequeEspecial
+        return super.getSaldo()+this.chequeEspecial;//getChequeEspecial
     }
 
 //    public double getChequeEspecial() {
@@ -40,9 +40,9 @@ public class ContaCorrente extends Conta implements Impressao{
     public void imprimir() {
         DecimalFormat df = new DecimalFormat("0.00");
         System.out.println("Informações da conta do cliente: ");
-        this.getCliente().imprimirCliente();
-        System.out.println("Agência: "+this.getAgencia()+" Conta: "+this.getNumeroConta());
-        System.out.println("Saldo: "+df.format(this.getSaldo()));
+        super.getCliente().imprimirCliente();
+        System.out.println("Agência: "+super.getAgencia()+" Conta: "+super.getNumeroConta());
+        System.out.println("Saldo: "+df.format(super.getSaldo()));
         System.out.println("Cheque Especial: "+df.format(this.chequeEspecial));//getChequeEspecial
     }
 }
