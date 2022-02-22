@@ -13,15 +13,9 @@ public class Cliente {
         this.cpf = cpf;
         this.contatos = new ArrayList<>(contatos);
         this.enderecos = new ArrayList<>(enderecos);
-
     }
 
     public void imprimirContatos(){
-//        for(int i=0;i<contatos.length && this.contatos[i]!=null;i++){
-//            System.out.println("Contato "+ (i+1) +":");
-//            contatos[i].imprimirContato();
-//        }
-
         for(int i=0;!contatos.isEmpty();i++){
             System.out.println("Contato "+ (i+1) +":");
             contatos.get(i).imprimirContato();
@@ -29,11 +23,6 @@ public class Cliente {
     }
 
     public void imprimirEnderecos(){
-//        for(int i=0;i<enderecos.length && this.enderecos[i]!=null;i++){
-//            System.out.println("Endereço "+ (i+1) +":");
-//            enderecos[i].imprimirEndereco();
-//        }
-
         for(int i=0;!enderecos.isEmpty();i++){
             System.out.println("Endereco "+ (i+1) +":");
             enderecos.get(i).imprimirEndereco();
@@ -60,20 +49,11 @@ public class Cliente {
         this.cpf = cpf;
     }
 
-//    public Contato[] getContatos() {
-//        return contatos;
-//    }
+    public ArrayList<Contato> getContatos() {
+        return contatos;
+    }
 
-//    public void setContatos(Contato[] contatos) {
-//        this.contatos = contatos;
-//    } //NAO FUNCIONA, O GET DEVE SER USADO PARA MODIFICAR A POSICAO (cliente.getContatos()[0] = contato)
-    //tenho que validar a quantidade de valores
-
-//    public Endereco[] getEnderecos() {
-//        return enderecos;
-//    }
-
-//    public void setEnderecos(Endereco[] enderecos) {
-//        this.enderecos = enderecos;
-//    }
+    public ArrayList<Endereco> getEnderecos() {
+        return enderecos;
+    }
 }

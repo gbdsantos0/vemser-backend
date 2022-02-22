@@ -91,7 +91,7 @@ public class Main {
         contaPagamento.imprimir();
 
         System.out.println("##############################################################");
-        System.out.println("###SAQUE FALHO DE 999###");
+        System.out.println("###SAQUE FALHO DE 999 POR CONTA DA TAXA DE 4,25###");
         //tentativa com sucesso
         if(contaPagamento.sacar(999)){
             System.out.println("Saque efetuado com sucesso!");
@@ -161,7 +161,7 @@ public class Main {
         contaCorrente.imprimir();
 
         System.out.println("##############################################################");
-        System.out.println("###TRANSFERENCIA  DE 200 DA CONTA CORRENTE PARA A CONTA POUPANCA###");
+        System.out.println("###TRANSFERENCIA  DE 300 DA CONTA CORRENTE PARA A CONTA POUPANCA###");
 
         //transferencia
 
@@ -170,7 +170,7 @@ public class Main {
 
         contaPoupanca.imprimir();
         System.out.println();
-        if(contaCorrente.transferir(contaPoupanca,200)){
+        if(contaCorrente.transferir(contaPoupanca,300)){
             System.out.println("Transferencia realizada com sucesso");
         }else{
             System.out.println("Sem saldo para transferencia");
