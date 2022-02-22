@@ -12,10 +12,10 @@ public class Cliente {
         this.contatos = new Contato[2];
         this.enderecos = new Endereco[2];
 
-        for(int i=0;i<contatos.length && contatos[i]!=null;i++){
+        for(int i=0;i<this.contatos.length && contatos[i]!=null;i++){
             this.contatos[i]=contatos[i];
         }
-        for(int i=0;i<enderecos.length && enderecos[i]!=null;i++){
+        for(int i=0;i<this.enderecos.length && enderecos[i]!=null;i++){
             this.enderecos[i]=enderecos[i];
         }
     }
@@ -58,15 +58,16 @@ public class Cliente {
         return contatos;
     }
 
-    public void setContatos(Contato[] contatos) {
-        this.contatos = contatos;
-    }
+//    public void setContatos(Contato[] contatos) {
+//        this.contatos = contatos;
+//    } //NAO FUNCIONA, O GET DEVE SER USADO PARA MODIFICAR A POSICAO (cliente.getContatos()[0] = contato)
+    //tenho que validar a quantidade de valores
 
     public Endereco[] getEnderecos() {
         return enderecos;
     }
 
-    public void setEnderecos(Endereco[] enderecos) {
-        this.enderecos = enderecos;
-    }
+//    public void setEnderecos(Endereco[] enderecos) {
+//        this.enderecos = enderecos;
+//    }
 }
