@@ -26,8 +26,8 @@ public class HomeworkStream {
         //2- filtrar todas as pessoas com salario maior do que 5 mil
 
         List<Pessoa> listaMaiorCincoK = lista.stream()
-                .filter(pessoa -> pessoa.getSalario()>5000)
-                .collect(Collectors.toList());
+                .filter(pessoa -> pessoa.getSalario() > 5000)
+                .toList();
 
         listaMaiorCincoK.forEach(System.out::println);
         System.out.println("\n################################################################################################" +
@@ -39,7 +39,7 @@ public class HomeworkStream {
         List<Pessoa> listaDevs = lista.stream()
                 .filter(pessoa -> pessoa.getCargo().equalsIgnoreCase("desenvolvedor"))
                 .sorted(Comparator.comparing(Pessoa::getSalario))
-                .collect(Collectors.toList());
+                .toList();
 
         listaDevs.forEach(System.out::println);
         System.out.println("\n################################################################################################" +
@@ -71,8 +71,8 @@ public class HomeworkStream {
         //6 - retornar uma lista de todos os ids das pessoas
 
         List<Integer> listaIds = lista.stream()
-                .map(pessoa -> pessoa.getId())
-                .collect(Collectors.toList());
+                .map(Pessoa::getId)
+                .toList();
 
         listaIds.forEach(System.out::println);
         System.out.println("\n################################################################################################" +
@@ -83,7 +83,7 @@ public class HomeworkStream {
 
         List<Salario> listaSalarios = lista.stream()
                 .map(pessoa -> new Salario(pessoa.getId(), pessoa.getSalario()))
-                .collect(Collectors.toList());
+                .toList();
 
         listaSalarios.forEach(System.out::println);
         System.out.println("\n################################################################################################" +
@@ -102,11 +102,19 @@ public class HomeworkStream {
 
         //9- com o mapa da questão 8, retornar o nome com o id=2
 
-        System.out.println(mapIdsNomes.entrySet().stream()
-                .filter(mapa -> mapa.getKey()==2)
+        System.out.println(mapIdsNomes.entrySet()
+                        .stream()
+                        .filter(mapa -> mapa.getKey() == 2)
                         .map(Map.Entry::getValue)
-                        .collect(Collectors.toList())
+                        .toList()
                         .get(0)
+
+//                mapIdsNomes.entrySet()
+//                        .stream()
+//                        .filter(mapa -> mapa.getKey()==2)
+//                        .map(Map.Entry::getValue)
+//                        .findFirst()
+//                        .get()
                 );
         System.out.println(mapIdsNomes.get(2));
 
