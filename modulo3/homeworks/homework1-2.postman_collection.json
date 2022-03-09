@@ -1,0 +1,750 @@
+{
+	"info": {
+		"_postman_id": "bee04f1d-01a8-4387-a54b-85cf9779d3fb",
+		"name": "homework1-2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "PESSOA",
+			"item": [
+				{
+					"name": "GET-PESSOA",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET-PESSOA",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pessoa"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:24:04 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"idPessoa\": 1,\n        \"nome\": \"Maicon Gerardi\",\n        \"dataNascimento\": \"1990-10-10\",\n        \"cpf\": \"12345678910\"\n    },\n    {\n        \"idPessoa\": 2,\n        \"nome\": \"Charles Pereira\",\n        \"dataNascimento\": \"1985-05-08\",\n        \"cpf\": \"12345678911\"\n    },\n    {\n        \"idPessoa\": 3,\n        \"nome\": \"Marina Oliveira\",\n        \"dataNascimento\": \"1970-03-30\",\n        \"cpf\": \"12345678912\"\n    },\n    {\n        \"idPessoa\": 4,\n        \"nome\": \"Rafael Lazzari\",\n        \"dataNascimento\": \"1990-07-01\",\n        \"cpf\": \"12345678916\"\n    },\n    {\n        \"idPessoa\": 1,\n        \"nome\": \"Gustavo Barbosa\",\n        \"dataNascimento\": \"1995-12-07\",\n        \"cpf\": \"111850111111\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "POST-PESSOA",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Gustavo Barbosa\",\r\n        \"dataNascimento\": \"1995-12-07\",\r\n        \"cpf\": \"111850111111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST-PESSOA",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"nome\": \"Gustavo Barbosa\",\r\n        \"dataNascimento\": \"1995-12-07\",\r\n        \"cpf\": \"111850111111\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/pessoa",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pessoa"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:23:42 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"idPessoa\": 1,\n    \"nome\": \"Gustavo Barbosa\",\n    \"dataNascimento\": \"1995-12-07\",\n    \"cpf\": \"111850111111\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT-PESSOA",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n        \"nome\": \"Gustavo Barbosa\",\r\n        \"dataNascimento\": \"1995-12-07\",\r\n        \"cpf\": \"111850831111\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa/8",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa",
+								"8"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "New Request",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n        \"nome\": \"Gustavo Barbosa\",\r\n        \"dataNascimento\": \"1995-12-07\",\r\n        \"cpf\": \"111850831111\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/pessoa/8",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pessoa",
+										"8"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:32:31 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"idPessoa\": 8,\n    \"nome\": \"Gustavo Barbosa\",\n    \"dataNascimento\": \"1995-12-07\",\n    \"cpf\": \"111850831111\"\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE-PESSOA",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/pessoa/8?cpf=111850831111",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"pessoa",
+								"8"
+							],
+							"query": [
+								{
+									"key": "cpf",
+									"value": "111850831111"
+								}
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE-PESSOA",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/pessoa/8?cpf=111850831111",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"pessoa",
+										"8"
+									],
+									"query": [
+										{
+											"key": "cpf",
+											"value": "111850831111"
+										}
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:34:45 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [
+								{
+									"expires": "Invalid Date"
+								}
+							],
+							"body": ""
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "CONTATO",
+			"item": [
+				{
+					"name": "GET-CONTATO",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET-CONTATO",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/contato",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"contato"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:42:46 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"idContato\": 1,\n        \"idPessoa\": 1,\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"048995876566\",\n        \"descricao\": \"whatsapp\"\n    },\n    {\n        \"idContato\": 2,\n        \"idPessoa\": 1,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"04833545655\",\n        \"descricao\": \"casa\"\n    },\n    {\n        \"idContato\": 3,\n        \"idPessoa\": 2,\n        \"tipoContato\": \"COMERCIAL\",\n        \"numero\": \"051998654789\",\n        \"descricao\": \"trabalho\"\n    },\n    {\n        \"idContato\": 4,\n        \"idPessoa\": 3,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"123456789\",\n        \"descricao\": \"whats\"\n    },\n    {\n        \"idContato\": 5,\n        \"idPessoa\": 3,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"123456789\",\n        \"descricao\": \"whats\"\n    },\n    {\n        \"idContato\": 6,\n        \"idPessoa\": 3,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"123456789\",\n        \"descricao\": \"whats\"\n    },\n    {\n        \"idContato\": 7,\n        \"idPessoa\": 9,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"11111111111\",\n        \"descricao\": \"ZAP\"\n    }\n]"
+						}
+					]
+				},
+				{
+					"name": "POST-CONTATO",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"11111111111\",\r\n    \"descricao\": \"ZAP\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/9",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "POST-CONTATO",
+							"originalRequest": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tipoContato\": \"RESIDENCIAL\",\r\n    \"numero\": \"11111111111\",\r\n    \"descricao\": \"ZAP\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/contato/9",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"contato",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:42:12 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"idContato\": 7,\n    \"idPessoa\": 9,\n    \"tipoContato\": \"RESIDENCIAL\",\n    \"numero\": \"11111111111\",\n    \"descricao\": \"ZAP\"\n}"
+						}
+					]
+				},
+				{
+					"name": "PUT-CONTATO",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"tipoContato\": \"COMERCIAL\",\r\n    \"numero\": \"11111111117\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "PUT-CONTATO",
+							"originalRequest": {
+								"method": "PUT",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\r\n    \"tipoContato\": \"COMERCIAL\",\r\n    \"numero\": \"11111111117\"\r\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"contato",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:44:42 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"idContato\": 7,\n    \"idPessoa\": 9,\n    \"tipoContato\": \"COMERCIAL\",\n    \"numero\": \"11111111117\",\n    \"descricao\": null\n}"
+						}
+					]
+				},
+				{
+					"name": "DELETE-CONTATO",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"7"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "DELETE-CONTATO",
+							"originalRequest": {
+								"method": "DELETE",
+								"header": [],
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/contato/7",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"contato",
+										"7"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "plain",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Length",
+									"value": "0"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:45:05 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": ""
+						}
+					]
+				},
+				{
+					"name": "GET-CONTATO-1",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "https://back-vemserdbc.herokuapp.com/contato/9",
+							"protocol": "https",
+							"host": [
+								"back-vemserdbc",
+								"herokuapp",
+								"com"
+							],
+							"path": [
+								"contato",
+								"9"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "GET-CONTATO-1",
+							"originalRequest": {
+								"method": "GET",
+								"header": [],
+								"url": {
+									"raw": "https://back-vemserdbc.herokuapp.com/contato/9",
+									"protocol": "https",
+									"host": [
+										"back-vemserdbc",
+										"herokuapp",
+										"com"
+									],
+									"path": [
+										"contato",
+										"9"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Server",
+									"value": "Cowboy"
+								},
+								{
+									"key": "Connection",
+									"value": "keep-alive"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "Transfer-Encoding",
+									"value": "chunked"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 09 Mar 2022 20:43:16 GMT"
+								},
+								{
+									"key": "Via",
+									"value": "1.1 vegur"
+								}
+							],
+							"cookie": [],
+							"body": "[\n    {\n        \"idContato\": 7,\n        \"idPessoa\": 9,\n        \"tipoContato\": \"RESIDENCIAL\",\n        \"numero\": \"11111111111\",\n        \"descricao\": \"ZAP\"\n    }\n]"
+						}
+					]
+				}
+			]
+		}
+	]
+}
