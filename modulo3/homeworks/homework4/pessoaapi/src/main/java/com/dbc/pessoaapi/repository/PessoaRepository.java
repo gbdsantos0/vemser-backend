@@ -1,15 +1,15 @@
-package com.dbc.aulamodulo3.repository;
+package com.dbc.pessoaapi.repository;
 
-import com.dbc.aulamodulo3.entity.Pessoa;
-import com.dbc.aulamodulo3.exception.PessoaException;
+import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.exception.RegraDeNegocioException;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.concurrent.atomic.AtomicInteger;
-
 
 @Repository
 public class PessoaRepository {
@@ -18,7 +18,7 @@ public class PessoaRepository {
 
     public PessoaRepository(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        listaPessoas.add(new Pessoa(COUNTER.incrementAndGet(), "nome1", LocalDate.parse("01/01/2000", formatter), "000.000.000-00"));
+        listaPessoas.add(new Pessoa(COUNTER.incrementAndGet(), "Gustavo Barbosa", LocalDate.parse("07/12/1995", formatter), "00000000000"));
     }
 
     public Pessoa create(Pessoa pessoa){
@@ -35,7 +35,7 @@ public class PessoaRepository {
         Pessoa pessoaRecuperada = listaPessoas.stream()
                 .filter(p -> p.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
         pessoaRecuperada.setCpf(pessoaAtualizar.getCpf());
         pessoaRecuperada.setNome(pessoaAtualizar.getNome());
         pessoaRecuperada.setDataNascimento(pessoaAtualizar.getDataNascimento());
@@ -46,7 +46,7 @@ public class PessoaRepository {
         Pessoa pessoaRecuperada = listaPessoas.stream()
                 .filter(p -> p.getIdPessoa().equals(id))
                 .findFirst()
-                .orElseThrow(() -> new PessoaException("Pessoa não encontrada"));
+                .orElseThrow(() -> new RegraDeNegocioException("Pessoa não encontrada"));
         listaPessoas.remove(pessoaRecuperada);
         return pessoaRecuperada;
     }

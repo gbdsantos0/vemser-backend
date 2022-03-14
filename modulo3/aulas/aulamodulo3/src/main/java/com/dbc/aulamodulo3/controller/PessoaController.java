@@ -4,8 +4,11 @@ import com.dbc.aulamodulo3.components.PropertieReader;
 import com.dbc.aulamodulo3.entity.Pessoa;
 import com.dbc.aulamodulo3.service.PessoaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @RestController
@@ -28,7 +31,8 @@ public class PessoaController {
     }
 
     @PostMapping
-    public Pessoa create(@RequestBody Pessoa pessoa){
+    @Validated
+    public Pessoa create(@Valid @RequestBody Pessoa pessoa){
         return pessoaService.create(pessoa);
     }
 
@@ -48,7 +52,8 @@ public class PessoaController {
     }
 
     @PutMapping("/{idPessoa}")
-    public Pessoa update(@PathVariable("idPessoa") Integer id, @RequestBody Pessoa pessoaAtualizar) throws Exception {
+    @Validated
+    public Pessoa update(@PathVariable("idPessoa") Integer id, @Valid @RequestBody Pessoa pessoaAtualizar) throws Exception {
         return pessoaService.update(id, pessoaAtualizar);
     }
 

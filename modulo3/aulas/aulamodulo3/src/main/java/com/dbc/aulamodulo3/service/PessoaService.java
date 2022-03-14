@@ -21,7 +21,7 @@ public class PessoaService {
 
     public Pessoa create(Pessoa pessoa){
 
-        try {
+       /* try {
             //regras nome
             if(StringUtils.isBlank(pessoa.getNome())){
                 throw new Exception("Preencha o nome");
@@ -38,12 +38,12 @@ public class PessoaService {
             }else if(StringUtils.length(pessoa.getCpf())!=11 || !StringUtils.isNumeric(pessoa.getCpf())){
                 throw new Exception("Insira os 11 números de seu cpf");
             }
-
+*/
             return pessoaRepository.create(pessoa);
-        } catch (Exception e) {
+       /* } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-        return null;
+        return null;*/
     }
 
     public List<Pessoa> list(){
