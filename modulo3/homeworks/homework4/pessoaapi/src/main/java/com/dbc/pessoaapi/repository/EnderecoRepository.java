@@ -51,6 +51,9 @@ public class EnderecoRepository {
         enderecoRecuperado.setNumero(enderecoAlterado.getNumero());
         enderecoRecuperado.setCidade(enderecoAlterado.getCidade());
         enderecoRecuperado.setEstado(enderecoAlterado.getEstado());
+        enderecoRecuperado.setCep(enderecoAlterado.getCep());
+        enderecoRecuperado.setPais(enderecoAlterado.getPais());
+        enderecoRecuperado.setTipo(enderecoAlterado.getTipo());
 
         return enderecoRecuperado;
     }

@@ -35,7 +35,9 @@ public class ContatoRepository {
                 .findFirst()
                 .orElseThrow(() -> new RegraDeNegocioException("Contato não encontrado"));
         contatoRecuperado.setIdPessoa(contatoAtualizar.getIdPessoa());
+        contatoRecuperado.setTipoContato(contatoAtualizar.getTipoContato());
         contatoRecuperado.setNumero(contatoAtualizar.getNumero());
+        contatoRecuperado.setDescricao(contatoAtualizar.getDescricao());
 
         return contatoRecuperado;
     }
