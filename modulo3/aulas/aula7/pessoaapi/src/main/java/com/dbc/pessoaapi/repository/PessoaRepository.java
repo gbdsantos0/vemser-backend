@@ -18,7 +18,7 @@ public class PessoaRepository {
 
     public PessoaRepository(){
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-        listaPessoas.add(new Pessoa(COUNTER.incrementAndGet(), "Gustavo Barbosa", LocalDate.parse("07/12/1995", formatter), "00000000000"));
+        listaPessoas.add(new Pessoa(COUNTER.incrementAndGet(), "Gustavo Barbosa", LocalDate.parse("07/12/1995", formatter), "00000000000", "haha@gmail.com"));
         listaPessoas.add(Pessoa.builder()
                 .idPessoa(COUNTER.incrementAndGet())
                 .nome("Pessoa Dois")

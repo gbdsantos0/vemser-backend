@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.dto;
 import lombok.Data;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -17,4 +18,6 @@ public class PessoaCreateDTO {
     private LocalDate dataNascimento;
     @CPF
     private String cpf;
+    @Email
+    private String email;
 }

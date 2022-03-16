@@ -2,7 +2,9 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.EnderecoDTO;
+import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.Endereco;
+import com.dbc.pessoaapi.entity.Pessoa;
 import com.dbc.pessoaapi.exception.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -19,6 +21,8 @@ public class EnderecoService {
     private EnderecoRepository enderecoRepository;
     @Autowired
     private PessoaRepository pessoaRepository;
+    @Autowired
+    private EmailService emailService;
 
     @Autowired
     private ObjectMapper objectMapper;
@@ -42,16 +46,22 @@ public class EnderecoService {
 
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception{
         endereco.setIdPessoa(idPessoa);
-        pessoaRepository.getById(endereco.getIdPessoa());
+        Pessoa pessoa = pessoaRepository.getById(endereco.getIdPessoa());
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+        emailService.sendEmailMessage(pessoaDTO, "Novo endereço adicionado","Você adicionou com sucesso o seu endereço ao nosso sistema!");
         Endereco enderecoEntity = objectMapper.convertValue(endereco, Endereco.class);
         Endereco enderecoRetorno = enderecoRepository.create(enderecoEntity);
+
+
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
 
         return enderecoDTO;
     }
 
     public EnderecoDTO update(Integer id, EnderecoCreateDTO enderecoAlterado) throws Exception{
-        pessoaRepository.getById(enderecoAlterado.getIdPessoa());
+        Pessoa pessoa = pessoaRepository.getById(enderecoAlterado.getIdPessoa());
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+        emailService.sendEmailMessage(pessoaDTO, "Atualização de endereço","Você atualizou com sucesso o seu endereço em nosso sistema!");
         Endereco enderecoEntity = objectMapper.convertValue(enderecoAlterado, Endereco.class);
         Endereco enderecoRetorno = enderecoRepository.update(id,enderecoEntity);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
@@ -60,7 +70,9 @@ public class EnderecoService {
     }
 
     public EnderecoDTO delete(Integer id) throws Exception{
-
+        Pessoa pessoa = pessoaRepository.getById(enderecoRepository.getByIdEndereco(id).getIdPessoa());
+        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+        emailService.sendEmailMessage(pessoaDTO, "Exclusão de endereço","Você deletou com sucesso o seu endereço de nosso sistema!");
         Endereco enderecoRetorno = enderecoRepository.delete(id);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
 

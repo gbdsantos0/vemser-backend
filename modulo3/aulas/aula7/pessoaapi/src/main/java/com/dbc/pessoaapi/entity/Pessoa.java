@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.entity;
 import lombok.*;
 import org.hibernate.validator.constraints.br.CPF;
 
+import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
@@ -21,6 +22,8 @@ public class Pessoa {
     private LocalDate dataNascimento;
     @CPF
     private String cpf;
+    @Email
+    private String email;
 
     /*public Pessoa(Integer idPessoa, String nome, LocalDate dataNascimento, String cpf) {
         this.idPessoa = idPessoa;

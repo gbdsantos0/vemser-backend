@@ -19,10 +19,14 @@ public class PessoaService {
     @Autowired
     private ObjectMapper objectMapper;
 
+    @Autowired
+    private EmailService emailService;
+
     public PessoaDTO create(PessoaCreateDTO pessoa) throws Exception {
         Pessoa pessoaEntity = objectMapper.convertValue(pessoa, Pessoa.class);
         Pessoa pessoaCriada = pessoaRepository.create(pessoaEntity);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaCriada, PessoaDTO.class);
+        emailService.sendEmailToNewUser(pessoaDTO);
         return pessoaDTO;
     }
 
@@ -37,12 +41,14 @@ public class PessoaService {
         Pessoa pessoaEntity = objectMapper.convertValue(pessoaAtualizar, Pessoa.class);
         Pessoa pessoaAtualizada = pessoaRepository.update(id, pessoaEntity);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaAtualizada, PessoaDTO.class);
+        emailService.sendEmailToUpdatedUser(pessoaDTO);
         return pessoaDTO;
     }
 
     public PessoaDTO delete(Integer id) throws Exception {
         Pessoa pessoaDeletada = pessoaRepository.delete(id);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaDeletada, PessoaDTO.class);
+        emailService.sendEmailToDeletedUser(pessoaDTO);
         return pessoaDTO;
     }
 

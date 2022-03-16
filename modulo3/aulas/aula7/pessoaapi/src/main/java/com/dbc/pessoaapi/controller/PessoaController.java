@@ -3,6 +3,7 @@ package com.dbc.pessoaapi.controller;
 import com.dbc.pessoaapi.dto.PessoaCreateDTO;
 import com.dbc.pessoaapi.dto.PessoaDTO;
 import com.dbc.pessoaapi.entity.Pessoa;
+import com.dbc.pessoaapi.service.EmailService;
 import com.dbc.pessoaapi.service.PessoaService;
 import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +29,13 @@ public class PessoaController {
     @GetMapping("/hello")
     public String hello(){
         log.info("/hello chamado.");
+        //emailService.sendEmail();
         return "Hello world! " + nomeAppProperties;
+    }
+
+    @GetMapping("/teste")
+    public ResponseEntity alo(){
+        return new ResponseEntity(HttpStatus.ACCEPTED);
     }
 
     @PostMapping
