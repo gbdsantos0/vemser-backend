@@ -18,7 +18,7 @@ public class ContatoEntity {
     @SequenceGenerator(name = "CONTATO_SEQ", sequenceName = "seq_contato", allocationSize = 1)
     @Column(name = "id_contato")
     private Integer idContato;
-//    @Column(name = "id_pessoa")
+//    @Column(name = "id_pessoa", insertable = false, updatable = false)
 //    private Integer idPessoa;
     @Column(name = "tipo")
     @Enumerated(EnumType.ORDINAL)
