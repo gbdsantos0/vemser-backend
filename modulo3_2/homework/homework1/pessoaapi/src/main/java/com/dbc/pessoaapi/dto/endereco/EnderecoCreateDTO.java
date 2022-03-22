@@ -1,17 +1,18 @@
 package com.dbc.pessoaapi.dto.endereco;
 
 import io.swagger.annotations.ApiModelProperty;
-import lombok.Data;
+import lombok.*;
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
-@Data
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class EnderecoCreateDTO {
-    @ApiModelProperty(value = "Id da pessoa dentro do endereço")
-    private Integer idPessoa;
     @ApiModelProperty(value = "logradouro")
     @NotEmpty
     @Size(max=250)

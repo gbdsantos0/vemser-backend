@@ -10,7 +10,6 @@ import java.time.LocalDate;
 @Getter
 @Setter
 @Builder
-@ToString
 @Entity(name = "PESSOA")
 public class PessoaEntity {
     @Id

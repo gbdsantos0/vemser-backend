@@ -2,9 +2,9 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.endereco.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.endereco.EnderecoDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTO;
-import com.dbc.pessoaapi.entity.Endereco;
-import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.dto.endereco.EnderecoUpdateDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -27,29 +27,33 @@ public class EnderecoService {
     private ObjectMapper objectMapper;
 
     public List<EnderecoDTO> listAll() throws Exception{
-        return enderecoRepository.listAll().stream()
+        return enderecoRepository.findAll().stream()
                 .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
                 .collect(Collectors.toList());
     }
 
     public EnderecoDTO getByIdEndereco(Integer id) throws Exception{
-        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRepository.getByIdEndereco(id), EnderecoDTO.class);
+        EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRepository.findById(id), EnderecoDTO.class);
         return enderecoDTO;
     }
 
-    public List<EnderecoDTO> listByIdPessoa(Integer id) throws Exception{
-        return enderecoRepository.listByIdPessoa(id).stream()
-                .map(endereco -> objectMapper.convertValue(endereco, EnderecoDTO.class))
+    //todo corrigir idPessoa
+    /*public List<EnderecoDTO> listByIdPessoa(Integer id) throws Exception{
+        return enderecoRepository.findAll().stream()
+                .filter(enderecoEntity -> enderecoEntity.getIdPessoa().equals(id))
+                .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
                 .collect(Collectors.toList());
-    }
+    }*/
 
     public EnderecoDTO create(Integer idPessoa, EnderecoCreateDTO endereco) throws Exception{
-        endereco.setIdPessoa(idPessoa);
-        PessoaEntity pessoa = pessoaRepository.getById(endereco.getIdPessoa());
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+//        PessoaEntity pessoa = pessoaRepository.getById(endereco.getIdPessoa());
+//        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
         //emailService.sendEmailMessage(pessoaDTO, "Novo endereço adicionado","Você adicionou com sucesso o seu endereço ao nosso sistema!");
-        Endereco enderecoEntity = objectMapper.convertValue(endereco, Endereco.class);
-        Endereco enderecoRetorno = enderecoRepository.create(enderecoEntity);
+        //testa se a pessoa existe
+        pessoaRepository.getById(idPessoa);
+        EnderecoEntity enderecoEntity = objectMapper.convertValue(endereco, EnderecoEntity.class);
+        //todo enderecoEntity.setIdPessoa(idPessoa);
+        EnderecoEntity enderecoRetorno = enderecoRepository.save(enderecoEntity);
 
 
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
@@ -57,22 +61,27 @@ public class EnderecoService {
         return enderecoDTO;
     }
 
-    public EnderecoDTO update(Integer id, EnderecoCreateDTO enderecoAlterado) throws Exception{
-        PessoaEntity pessoa = pessoaRepository.getById(enderecoAlterado.getIdPessoa());
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+    public EnderecoDTO update(Integer id, EnderecoUpdateDTO enderecoAlterado) throws Exception{
+//        PessoaEntity pessoa = pessoaRepository.getById(enderecoAlterado.getIdPessoa());
+//        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
         //emailService.sendEmailMessage(pessoaDTO, "Atualização de endereço","Você atualizou com sucesso o seu endereço em nosso sistema!");
-        Endereco enderecoEntity = objectMapper.convertValue(enderecoAlterado, Endereco.class);
-        Endereco enderecoRetorno = enderecoRepository.update(id,enderecoEntity);
+        //testa se a pessoa existe
+        //pessoaRepository.getById(enderecoAlterado.getIdPessoa());
+        EnderecoEntity enderecoEntity = objectMapper.convertValue(enderecoAlterado, EnderecoEntity.class);
+        enderecoEntity.setIdEndereco(id);
+        EnderecoEntity enderecoRetorno = enderecoRepository.save(enderecoEntity);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
 
         return enderecoDTO;
     }
 
     public EnderecoDTO delete(Integer id) throws Exception{
-        PessoaEntity pessoa = pessoaRepository.getById(enderecoRepository.getByIdEndereco(id).getIdPessoa());
-        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
+//        PessoaEntity pessoa = pessoaRepository.getById(enderecoRepository.getByIdEndereco(id).getIdPessoa());
+//        PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
         //emailService.sendEmailMessage(pessoaDTO, "Exclusão de endereço","Você deletou com sucesso o seu endereço de nosso sistema!");
-        Endereco enderecoRetorno = enderecoRepository.delete(id);
+        EnderecoEntity enderecoRetorno = enderecoRepository.findById(id)
+                .orElseThrow(()->new RegraDeNegocioException("Endereço não encontrado por ID"));
+        enderecoRepository.deleteById(id);
         EnderecoDTO enderecoDTO = objectMapper.convertValue(enderecoRetorno, EnderecoDTO.class);
 
         return enderecoDTO;

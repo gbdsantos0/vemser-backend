@@ -51,7 +51,7 @@ public class PessoaService {
     }
 
     public PessoaDTO delete(Integer id) throws Exception {
-        PessoaEntity pessoaDeletada = pessoaRepository.findById(id).orElseThrow(()->new RegraDeNegocioException("Pessoa não encontrada"));
+        PessoaEntity pessoaDeletada = pessoaRepository.findById(id).orElseThrow(()->new RegraDeNegocioException("Pessoa não encontrada por esse ID"));
         pessoaRepository.deleteById(id);
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoaDeletada, PessoaDTO.class);
         //emailService.sendEmailToDeletedUser(pessoaDTO);
@@ -59,7 +59,7 @@ public class PessoaService {
     }
 
     public PessoaDTO getById(Integer id) throws Exception {
-        PessoaEntity pessoa = pessoaRepository.findById(id).orElseThrow(()->new RegraDeNegocioException("Pessoa não encontrada"));
+        PessoaEntity pessoa = pessoaRepository.findById(id).orElseThrow(()->new RegraDeNegocioException("Pessoa não encontrada por esse ID"));
         PessoaDTO pessoaDTO = objectMapper.convertValue(pessoa, PessoaDTO.class);
         return pessoaDTO;
     }

@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.endereco.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.endereco.EnderecoDTO;
+import com.dbc.pessoaapi.dto.endereco.EnderecoUpdateDTO;
 import com.dbc.pessoaapi.service.EnderecoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -45,7 +46,7 @@ public class EnderecoController {
         return enderecoService.getByIdEndereco(id);
     }
 
-    @ApiOperation(value = "Retorna uma lista de endereços por idPessoa")
+    /*@ApiOperation(value = "Retorna uma lista de endereços por idPessoa")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna a lista de endereços por idPessoa"),
             @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
@@ -54,7 +55,7 @@ public class EnderecoController {
     @GetMapping("/{idPessoa}/pessoa")
     public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer id) throws Exception{
         return enderecoService.listByIdPessoa(id);
-    }
+    }*/
 
     @ApiOperation(value = "Cria um novo endereço vinculado à uma pessoa e retorna as informações")
     @ApiResponses(value = {
@@ -80,7 +81,7 @@ public class EnderecoController {
     })
     @PutMapping("/{idEndereco}")
     @Validated
-    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id, @Valid @RequestBody EnderecoCreateDTO enderecoAlterado) throws Exception{
+    public ResponseEntity<EnderecoDTO> update(@PathVariable("idEndereco") Integer id, @Valid @RequestBody EnderecoUpdateDTO enderecoAlterado) throws Exception{
         EnderecoDTO enderecoPronto = enderecoService.update(id, enderecoAlterado);
         log.info("PUT concluído");
         return new ResponseEntity<>(enderecoPronto, HttpStatus.ACCEPTED);

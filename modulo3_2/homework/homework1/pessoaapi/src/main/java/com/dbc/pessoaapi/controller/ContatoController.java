@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.contato.ContatoCreateDTO;
 import com.dbc.pessoaapi.dto.contato.ContatoDTO;
+import com.dbc.pessoaapi.dto.contato.ContatoUpdateDTO;
 import com.dbc.pessoaapi.service.ContatoService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -70,7 +71,7 @@ public class ContatoController {
     })
     @PutMapping("/{idContato}")
     @Validated
-    public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id, @Valid @RequestBody ContatoCreateDTO contato) throws Exception {
+    public ResponseEntity<ContatoDTO> update(@PathVariable("idContato") Integer id, @Valid @RequestBody ContatoUpdateDTO contato) throws Exception {
         ContatoDTO contatoPronto = contatoService.update(id, contato);
         log.info("PUT concluído");
         return new ResponseEntity<>(contatoPronto, HttpStatus.ACCEPTED);
