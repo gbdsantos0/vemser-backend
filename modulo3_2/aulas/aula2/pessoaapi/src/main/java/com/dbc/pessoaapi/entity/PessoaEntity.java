@@ -1,9 +1,11 @@
 package com.dbc.pessoaapi.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Set;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -25,4 +27,17 @@ public class PessoaEntity {
     private String cpf;
     @Column(name = "email")
     private String email;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "pessoaEntity", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<ContatoEntity> contatos;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(
+            name = "Pessoa_X_Pessoa_Endereco"
+            ,joinColumns = @JoinColumn(name = "id_pessoa")
+            ,inverseJoinColumns = @JoinColumn(name = "id_endereco")
+    )
+    private Set<EnderecoEntity> enderecos;
 }

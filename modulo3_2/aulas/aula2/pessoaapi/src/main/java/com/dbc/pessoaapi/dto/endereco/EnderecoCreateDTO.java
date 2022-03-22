@@ -1,5 +1,6 @@
 package com.dbc.pessoaapi.dto.endereco;
 
+import com.dbc.pessoaapi.enums.TipoEndereco;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
@@ -33,7 +34,7 @@ public class EnderecoCreateDTO {
     private String pais;
     @ApiModelProperty(value = "tipo do endereço")
     @NotNull
-    private String tipo;
+    private TipoEndereco tipo;
     @ApiModelProperty(value = "cep")
     @NotEmpty
     @Size(max=8)
