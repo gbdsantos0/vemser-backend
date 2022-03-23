@@ -1,9 +1,8 @@
 package com.dbc.pessoaapi.controller;
 
-import com.dbc.pessoaapi.dto.pessoa.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTOComContatos;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTOComEnderecos;
+import com.dbc.pessoaapi.dto.pessoa.*;
+import com.dbc.pessoaapi.entity.PessoaEntity;
+import com.dbc.pessoaapi.repository.PessoaRepository;
 import com.dbc.pessoaapi.service.PessoaService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
@@ -79,17 +78,6 @@ public class PessoaController {
         return pessoaService.getById(id);
     }
 
-    /*@ApiOperation(value = "Retorna uma lista de pessoas por nome")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna uma lista de pessoas listadas por nome"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-    })
-    @GetMapping("/byname")
-    public List<PessoaDTO> listByName(@RequestParam("nome") String nome) throws Exception{
-        return pessoaService.listByName(nome);
-    }*/
-
     @ApiOperation(value = "Cria uma nova pessoa e retorna as informações")
     @ApiResponses(value = {
             @ApiResponse(code = 200, message = "Retorna uma pessoa criada"),
@@ -135,29 +123,6 @@ public class PessoaController {
         return new ResponseEntity<>(pessoaDeletada, HttpStatus.ACCEPTED);
     }
 
-//EXERCICIO2 - AULA2 MODULO3
-    @ApiOperation(value = "Retorna uma lista de pessoas por nome")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna uma lista de pessoas"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-    })
-    @GetMapping("/listar-por-nome")
-    public List<PessoaDTO> listByName(@RequestParam(value = "nome") String nome) throws Exception{
-        return pessoaService.listByName(nome);
-    }
-
-    @ApiOperation(value = "Retorna uma lista de pessoas por cpf")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna uma lista de pessoas"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-    })
-    @GetMapping("/listar-por-cpf")
-    public List<PessoaDTO> listByCpf(@RequestParam(value = "cpf") String cpf) throws Exception{
-        return pessoaService.listByCpf(cpf);
-    }
-
     //HOMEWORK2 - AULA2 MODULO3
 
     @ApiOperation(value = "Retorna uma lista de pessoas por data de nascimento, dentro dos intervalos")
@@ -180,7 +145,7 @@ public class PessoaController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/listar-com-contatos")
-    public List<PessoaDTOComContatos> listComContatos(@RequestParam(value = "id", required = false)Integer idPessoa) throws Exception{
+    public List<PessoaDTOComContatos> listComContatos(@RequestParam(value = "id", required = false) Integer idPessoa) throws Exception{
         return pessoaService.listComContatos(idPessoa);
     }
 
@@ -191,8 +156,19 @@ public class PessoaController {
             @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
     })
     @GetMapping("/listar-com-enderecos")
-    public List<PessoaDTOComEnderecos> listComEnderecos(@RequestParam(value = "id", required = false)Integer idPessoa) throws Exception{
+    public List<PessoaDTOComEnderecos> listComEnderecos(@RequestParam(value = "id", required = false) Integer idPessoa) throws Exception{
         return pessoaService.listComEnderecos(idPessoa);
+    }
+
+    @ApiOperation(value = "Retorna uma pessoa por Id com seus enderecos e contatos")
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "Retorna uma pessoa"),
+            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
+            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
+    })
+    @GetMapping("/pessoa-completo")
+    public List<PessoaTudoDTO> listPessoaCompleto(@RequestParam(value = "id", required = false) Integer idPessoa) throws Exception{
+        return pessoaService.listPessoaCompleto(idPessoa);
     }
 
 }

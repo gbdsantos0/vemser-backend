@@ -3,7 +3,10 @@ package com.dbc.pessoaapi.controller;
 import com.dbc.pessoaapi.dto.endereco.EnderecoCreateDTO;
 import com.dbc.pessoaapi.dto.endereco.EnderecoDTO;
 import com.dbc.pessoaapi.dto.endereco.EnderecoUpdateDTO;
+import com.dbc.pessoaapi.entity.EnderecoEntity;
+import com.dbc.pessoaapi.repository.EnderecoRepository;
 import com.dbc.pessoaapi.service.EnderecoService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
@@ -45,17 +48,6 @@ public class EnderecoController {
     public EnderecoDTO getByIdEndereco(@PathVariable("idEndereco") Integer id) throws Exception{
         return enderecoService.getByIdEndereco(id);
     }
-
-    /*@ApiOperation(value = "Retorna uma lista de endereços por idPessoa")
-    @ApiResponses(value = {
-            @ApiResponse(code = 200, message = "Retorna a lista de endereços por idPessoa"),
-            @ApiResponse(code = 403, message = "Você não tem permissão para acessar este recurso"),
-            @ApiResponse(code = 500, message = "Foi gerada uma exceção"),
-    })
-    @GetMapping("/{idPessoa}/pessoa")
-    public List<EnderecoDTO> listByIdPessoa(@PathVariable("idPessoa") Integer id) throws Exception{
-        return enderecoService.listByIdPessoa(id);
-    }*/
 
     @ApiOperation(value = "Cria um novo endereço vinculado à uma pessoa e retorna as informações")
     @ApiResponses(value = {
@@ -100,4 +92,5 @@ public class EnderecoController {
         log.info("DELETE concluído");
         return new ResponseEntity<>(enderecoPronto, HttpStatus.ACCEPTED);
     }
+
 }

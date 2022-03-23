@@ -2,10 +2,7 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.contato.ContatoDTO;
 import com.dbc.pessoaapi.dto.endereco.EnderecoDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaCreateDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTO;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTOComContatos;
-import com.dbc.pessoaapi.dto.pessoa.PessoaDTOComEnderecos;
+import com.dbc.pessoaapi.dto.pessoa.*;
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.PessoaRepository;
@@ -140,6 +137,37 @@ public class PessoaService {
                     .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
                     .collect(Collectors.toList()));
             pessoaDTOList.add(pessoaDTOComEnderecos);
+        }
+        return pessoaDTOList;
+    }
+
+    //HOMEWORK3
+    public List<PessoaTudoDTO> listPessoaCompleto(Integer idPessoa) throws Exception{
+        List<PessoaTudoDTO> pessoaDTOList = new ArrayList<>();
+        if(idPessoa==null){
+            pessoaDTOList.addAll(
+                    pessoaRepository.findAll().stream()
+                            .map(pessoaEntity -> {
+                                PessoaTudoDTO pessoaTudoDTO = objectMapper.convertValue(pessoaEntity, PessoaTudoDTO.class);
+                                pessoaTudoDTO.setEnderecos(pessoaEntity.getEnderecos().stream()
+                                        .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
+                                        .collect(Collectors.toList()));
+                                pessoaTudoDTO.setContatos(pessoaEntity.getContatos().stream()
+                                        .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class))
+                                        .collect(Collectors.toList()));
+                                return pessoaTudoDTO;
+                            }).collect(Collectors.toList()));
+        }else{
+            PessoaEntity pessoaEntity = pessoaRepository.findById(idPessoa)
+                    .orElseThrow(()->new RegraDeNegocioException("Pessoa não encontrada pelo ID informado"));
+            PessoaTudoDTO pessoaTudoDTO = objectMapper.convertValue(pessoaEntity, PessoaTudoDTO.class);
+            pessoaTudoDTO.setEnderecos(pessoaEntity.getEnderecos().stream()
+                    .map(enderecoEntity -> objectMapper.convertValue(enderecoEntity, EnderecoDTO.class))
+                    .collect(Collectors.toList()));
+            pessoaTudoDTO.setContatos(pessoaEntity.getContatos().stream()
+                    .map(contatoEntity -> objectMapper.convertValue(contatoEntity, ContatoDTO.class))
+                    .collect(Collectors.toList()));
+            pessoaDTOList.add(pessoaTudoDTO);
         }
         return pessoaDTOList;
     }

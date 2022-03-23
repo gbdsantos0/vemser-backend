@@ -36,6 +36,8 @@ public class EnderecoEntity {
     private TipoEndereco tipo;
     @Column(name = "cep")
     private String cep;
+    @Column(name = "complemento")
+    private String complemento;
 
     @JsonIgnore
     @ManyToMany(mappedBy = "enderecos")

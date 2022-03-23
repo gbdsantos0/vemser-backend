@@ -4,6 +4,7 @@ import com.dbc.pessoaapi.enums.TipoEndereco;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.*;
 
+import javax.persistence.Column;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
@@ -39,4 +40,7 @@ public class EnderecoCreateDTO {
     @NotEmpty
     @Size(max=8)
     private String cep;
+    @ApiModelProperty(value = "complemento")
+    @Size(max=250)
+    private String complemento;
 }
