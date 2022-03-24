@@ -2,6 +2,8 @@ package com.dbc.pessoaapi.repository;
 
 import com.dbc.pessoaapi.entity.PessoaEntity;
 import org.apache.tomcat.jni.Local;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -47,4 +49,7 @@ public interface PessoaRepository extends JpaRepository<PessoaEntity, Integer> {
             "WHERE ep.id_pessoa IS NULL", nativeQuery = true)
     List<PessoaEntity> findPessoaSemEndereco();
 
+    //AULA4
+    //@Query("select p from PESSOA p where upper(p.nome) like :nome")
+//    Page<PessoaEntity> findByNomeContainsIgnoreCase(String nome, Pageable pageable);
 }

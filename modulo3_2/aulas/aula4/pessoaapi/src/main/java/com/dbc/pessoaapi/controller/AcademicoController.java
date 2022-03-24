@@ -16,6 +16,10 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiResponse;
 import io.swagger.annotations.ApiResponses;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -24,6 +28,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 @RestController
 @RequestMapping("/ciencia")
@@ -116,4 +121,11 @@ public class AcademicoController {
     public List<PessoaEntity> findPessoaSemEndereco() throws Exception{
         return pessoaRepository.findPessoaSemEndereco();
     }
+
+    //AULA4
+    /*@GetMapping("/by-paginacao")
+    public Page<PessoaEntity> findByNamePaged(@RequestParam(value = "paginaSolicitada") Integer paginaSolicitada, @RequestParam(value = "tamanhoDaPagina") Integer tamanhoDaPagina, @RequestParam(value = "") String nome){
+        Pageable pageable = PageRequest.of(paginaSolicitada, tamanhoDaPagina, Sort.by("cpf").descending().and(Sort.by("nome")));
+        return pessoaRepository.findByNomeContainsIgnoreCase(nome.toUpperCase(Locale.ROOT), pageable);
+    }*/
 }

@@ -2,6 +2,8 @@ package com.dbc.pessoaapi.repository;
 
 import com.dbc.pessoaapi.entity.ContatoEntity;
 import com.dbc.pessoaapi.entity.EnderecoEntity;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
@@ -27,4 +29,9 @@ public interface EnderecoRepository extends JpaRepository<EnderecoEntity, Intege
     @Query(value = "SELECT * FROM VEM_SER.ENDERECO_PESSOA e " +
             "WHERE e.complemento IS NULL", nativeQuery = true)
     List<EnderecoEntity> findComplementoNull();
+
+    //AULA4
+    //EXERCICIO1
+//    Page<EnderecoEntity> findAll(Pageable pageable);
+    Page<EnderecoEntity> findByPaisIgnoreCase(String pais, Pageable pageable);
 }
