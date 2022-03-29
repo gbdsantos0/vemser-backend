@@ -46,12 +46,11 @@ public class Main {
         //todo 4 - dia da semana e do ano do dia atual+15 dias e 10h
         System.out.println("\n#########################################################################################################################################################");
         System.out.println("Exercicio 4");
-        LocalDateTime horaAtualEx4 = LocalDateTime.now();
-        LocalDateTime horaQuinzeDias = horaAtualEx4.plusDays(15).plusHours(10);
-        Period periodoAteQuinzeMais = Period.between(horaAtualEx4.toLocalDate(), horaQuinzeDias.toLocalDate());
+        LocalDateTime horaQuinzeDias = LocalDateTime.now().plusDays(15).plusHours(10);
         System.out.println("Informações daqui 15 dias e 10 horas"
                 +"\nDia da semana:\t\t"+horaQuinzeDias.getDayOfWeek()
-                +"\nDia:\t\t\t\t"+horaQuinzeDias.format(format));
+                +"\nDia:\t\t\t\t"+horaQuinzeDias.format(format)
+                +"\nDia corrido:\t\t"+horaQuinzeDias.getDayOfYear());
         //todo 5 - instanciar data, imprimir brasileira, eua e francesa
         System.out.println("\n#########################################################################################################################################################");
         System.out.println("Exercicio 5");
