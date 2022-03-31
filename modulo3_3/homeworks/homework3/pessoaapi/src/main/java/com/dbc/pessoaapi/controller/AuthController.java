@@ -1,6 +1,7 @@
 package com.dbc.pessoaapi.controller;
 
 import com.dbc.pessoaapi.dto.login.LoginDTO;
+import com.dbc.pessoaapi.dto.login.LoginExecutadoDTO;
 import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.security.TokenService;
 import com.dbc.pessoaapi.service.UsuarioService;
@@ -38,7 +39,20 @@ public class AuthController {
     }
 
     @PostMapping("/sign-up")
-    public void signUp(@RequestBody @Valid LoginDTO loginDTO) throws Exception{
+    public LoginExecutadoDTO signUp(@RequestBody @Valid LoginDTO loginDTO) throws Exception{
         usuarioService.signUp(loginDTO);
+        LoginExecutadoDTO loginExecutadoDTO = new LoginExecutadoDTO();
+        loginExecutadoDTO.setLogin(loginDTO.getLogin());
+
+        UsernamePasswordAuthenticationToken usernamePasswordAuthenticationToken =
+                new UsernamePasswordAuthenticationToken(loginDTO.getLogin(), loginDTO.getSenha());//gera UPAT de login
+
+        Authentication authenticate = authenticationManager.authenticate(usernamePasswordAuthenticationToken);//autentica com o UPAT
+
+        String token = tokenService.getToken(authenticate);//retorna o token a partir do Authentication
+
+        loginExecutadoDTO.setToken(token);
+
+        return loginExecutadoDTO;
     }
 }

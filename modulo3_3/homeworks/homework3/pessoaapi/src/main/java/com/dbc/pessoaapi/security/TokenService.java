@@ -28,12 +28,12 @@ public class TokenService {
     private String secret;
 
     public String getToken(Authentication authentication){//GERA UM TOKEN A PARTIR DO USUARIO E SENHA
-        UsuarioEntity usuario = (UsuarioEntity) authentication.getPrincipal();//todo o que faz?
+        UsuarioEntity usuario = (UsuarioEntity) authentication.getPrincipal();
 
         Date now = new Date();//data atual
         Date exp = new Date(now.getTime()+Long.parseLong(expiration));//data de expiracao
 
-        String token = Jwts.builder()//todo entender
+        String token = Jwts.builder()
                 .setIssuer("pessoa-api")
                 .setSubject(usuario.getIdUsuario().toString())
                 .setIssuedAt(now)
@@ -48,7 +48,7 @@ public class TokenService {
         String tokenBearer = request.getHeader(HEADER_AUTHORIZATION);//busca o header com "Authorization"
         if(tokenBearer!=null){
             String token = tokenBearer.replaceFirst(PREFIX, "");//replace first pra nao correr risco? ou " " nao pode existir?
-            String user = Jwts.parser()//todo endenter
+            String user = Jwts.parser()
                     .setSigningKey(secret)
                     .parseClaimsJws(token)
                     .getBody()

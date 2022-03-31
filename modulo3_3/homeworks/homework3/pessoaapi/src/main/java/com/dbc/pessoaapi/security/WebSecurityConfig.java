@@ -40,13 +40,13 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
     }
 
     @Override
-    protected void configure(AuthenticationManagerBuilder auth) throws Exception {//todo instancia o encoder?
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.userDetailsService(authenticationService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Bean
     @Override
-    protected AuthenticationManager authenticationManager() throws Exception{//todo onde é usado?
+    protected AuthenticationManager authenticationManager() throws Exception{
         return super.authenticationManager();
     }
 }

@@ -2,6 +2,7 @@ package com.dbc.pessoaapi.service;
 
 import com.dbc.pessoaapi.dto.login.LoginDTO;
 import com.dbc.pessoaapi.entity.UsuarioEntity;
+import com.dbc.pessoaapi.exceptions.RegraDeNegocioException;
 import com.dbc.pessoaapi.repository.UsuarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -22,7 +23,13 @@ public class UsuarioService {
         return usuarioRepository.findByLogin(login);
     }
 
-    public void signUp(LoginDTO loginDTO){
+    public void signUp(LoginDTO loginDTO) throws RegraDeNegocioException {
+
+        Optional<UsuarioEntity> usuarioExistente = usuarioRepository.findByLogin(loginDTO.getLogin());
+        if(usuarioExistente.isPresent()){
+            throw new RegraDeNegocioException("Usuário já cadastrado no sistema");
+        }
+
         UsuarioEntity usuario = new UsuarioEntity();
         usuario.setLogin(loginDTO.getLogin());
         usuario.setSenha(new BCryptPasswordEncoder().encode(loginDTO.getSenha()));
