@@ -31,6 +31,9 @@ public class ChatService {
     private final KafkaTemplate<String,String> kafkaTemplate;
     private final ObjectMapper objectMapper;
 
+    @Value("${kafka.client-name}")
+    private String user;
+
     //METODO LISTENER PARA TOPICO PARTICULAR
     @KafkaListener(
             topics = "${kafka.topic}",
@@ -89,7 +92,7 @@ public class ChatService {
 
     public void sendMessage(String message, List<NomesChats> destinatarios) throws JsonProcessingException {
         MensagemDTO mensagemDTO = MensagemDTO.builder()
-                .usuario("Gustavo")//todo ALTERAR PARA PUXAR NO APPLICATION.PROPERTIES?
+                .usuario(user)
                 .mensagem(message)
                 .dataCriacao(LocalDateTime.now())
                 .build();
