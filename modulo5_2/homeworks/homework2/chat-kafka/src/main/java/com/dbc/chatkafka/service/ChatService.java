@@ -35,14 +35,15 @@ public class ChatService {
     @KafkaListener(
             topics = "${kafka.topic}",
             groupId = "${kafka.group-id}",
-            containerFactory = "listenerContainerFactory")
+            containerFactory = "listenerContainerFactory",
+            clientIdPrefix = "private")
     public void consumeParticular(@Payload String message,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                         @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
 
         MensagemDTO messageDTO = objectMapper.readValue(message, MensagemDTO.class);
 
-        log.info(messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + "[" + messageDTO.getUsuario() + "](privada): " + messageDTO.getMensagem());
+        log.info(messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "](privada): " + messageDTO.getMensagem());
 
         log.info("#### offset -> '" + offset + "' key -> '" + key + "' -> Consumed Object message -> '" + message + "'");
     }
@@ -51,14 +52,15 @@ public class ChatService {
     @KafkaListener(
             topics = "${kafka.general.topic}",
             groupId = "${kafka.group-id}",
-            containerFactory = "listenerContainerFactory")
+            containerFactory = "listenerContainerFactory",
+    clientIdPrefix = "geral")
     public void consumeGeneral(@Payload String message,
                                   @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                                   @Header(KafkaHeaders.OFFSET) Long offset) throws JsonProcessingException {
 
         MensagemDTO messageDTO = objectMapper.readValue(message, MensagemDTO.class);
 
-        log.info(messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + "[" + messageDTO.getUsuario() + "]: " + messageDTO.getMensagem());
+        log.info(messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "]: " + messageDTO.getMensagem());
 
         log.info("#### offset -> '" + offset + "' key -> '" + key + "' -> Consumed Object message -> '" + message + "'");
     }

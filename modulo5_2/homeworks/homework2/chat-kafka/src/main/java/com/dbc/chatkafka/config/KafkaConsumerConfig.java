@@ -26,9 +26,6 @@ public class KafkaConsumerConfig {
     @Value(value = "${kafka.client-id}")
     private String clientId;//nome do client
 
-    @Value(value = "{kafka.topic}")
-    private String topic;//nome do topico
-
     @Bean
     public ConcurrentKafkaListenerContainerFactory<String, String> listenerContainerFactory(){
         Map<String, Object> props = new HashMap<>();
