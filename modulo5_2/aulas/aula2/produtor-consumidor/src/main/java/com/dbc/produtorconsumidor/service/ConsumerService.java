@@ -1,4 +1,4 @@
-package com.dbc.produtorconsumidor.controller;
+package com.dbc.produtorconsumidor.service;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.kafka.annotation.KafkaListener;
@@ -15,6 +15,16 @@ public class ConsumerService {
             groupId = "group1",
             containerFactory = "listenerContainerFactory")
     public void consume(@Payload String message,
+                        @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
+                        @Header(KafkaHeaders.OFFSET) Long offset){
+        log.info("#### offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, message);
+    }
+
+    @KafkaListener(
+            topics = "${kafka.topic}",
+            groupId = "group1",
+            containerFactory = "listenerContainerFactory")
+    public void consumeObject(@Payload String message,
                         @Header(KafkaHeaders.RECEIVED_MESSAGE_KEY) String key,
                         @Header(KafkaHeaders.OFFSET) Long offset){
         log.info("#### offset -> '{}' key -> '{}' -> Consumed Object message -> '{}'  ", offset, key, message);

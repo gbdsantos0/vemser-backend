@@ -1,6 +1,8 @@
-package com.dbc.produtorconsumidor.service;
+package com.dbc.veiculoprodutorconsumidor.service;
 
 
+import com.dbc.veiculoprodutorconsumidor.DTO.VehicleCreateDTO;
+import com.dbc.veiculoprodutorconsumidor.DTO.VehicleDTO;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
@@ -15,6 +17,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.util.concurrent.ListenableFuture;
 import org.springframework.util.concurrent.ListenableFutureCallback;
 
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Service
@@ -35,6 +38,13 @@ public class ProducerService {
     public void sendObject(Object object, String topic) throws JsonProcessingException {
         String convertedObject = objectMapper.writeValueAsString(object);
         this.send(convertedObject, topic);
+    }
+
+    public void sendVehicleData(VehicleCreateDTO vehicleDTO) throws JsonProcessingException {
+        VehicleDTO vehicle = objectMapper.convertValue(vehicleDTO, VehicleDTO.class);
+        vehicle.setDataLeitura(LocalDateTime.now());
+        String message = objectMapper.writeValueAsString(vehicle);
+        this.send(message, this.topic);
     }
 
     public void send(String message, String topic) {
