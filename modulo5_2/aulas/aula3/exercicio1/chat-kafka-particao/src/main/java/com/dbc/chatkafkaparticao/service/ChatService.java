@@ -1,13 +1,14 @@
-package com.dbc.chatkafka.service;
+package com.dbc.chatkafkaparticao.service;
 
-import com.dbc.chatkafka.DTO.MensagemDTO;
-import com.dbc.chatkafka.enums.NomesChats;
+import com.dbc.chatkafkaparticao.DTO.MensagemDTO;
+import com.dbc.chatkafkaparticao.enums.NomesChats;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.annotation.KafkaListener;
+import org.springframework.kafka.annotation.TopicPartition;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.kafka.support.KafkaHeaders;
 import org.springframework.kafka.support.SendResult;
@@ -45,9 +46,13 @@ public class ChatService {
     @Value("${kafka.client-name}")
     private String user;
 
+    @Value("${kafka.general.topic}")
+    private String topic;
+
     //METODO LISTENER PARA TOPICO PARTICULAR
     @KafkaListener(
-            topics = "${kafka.topic}",
+//            topics = "${kafka.topic}",
+            topicPartitions = {@TopicPartition(topic = "${kafka.general.topic}", partitions = {"${kafka.client-partition}"})},
             groupId = "${kafka.group-id}",
             containerFactory = "listenerContainerFactory",
             clientIdPrefix = "private")
@@ -57,14 +62,15 @@ public class ChatService {
 
         MensagemDTO messageDTO = objectMapper.readValue(message, MensagemDTO.class);
 
-        log.info(ANSI_GREEN+messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "]"+ANSI_RED+"(privada)"+ANSI_GREEN+": "+ ANSI_RESET + messageDTO.getMensagem()+ANSI_RESET);
+        log.info(ANSI_GREEN+messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "]"+ANSI_RED+"(privada)"+ANSI_GREEN+": "+ ANSI_RESET + messageDTO.getMensagem()+ ANSI_RESET);
 
         log.info("#### offset -> '" + offset + "' key -> '" + key + "' -> Consumed Object message -> '" + message + "'");
     }
 
     //METODO LISTENER PARA TOPICO GERAL
     @KafkaListener(
-            topics = "${kafka.general.topic}",
+//            topics = "${kafka.general.topic}",
+            topicPartitions = {@TopicPartition(topic = "${kafka.general.topic}", partitions = {"0"})},
             groupId = "${kafka.group-id}",
             containerFactory = "listenerContainerFactory",
     clientIdPrefix = "geral")
@@ -74,16 +80,17 @@ public class ChatService {
 
         MensagemDTO messageDTO = objectMapper.readValue(message, MensagemDTO.class);
 
-        log.info(ANSI_GREEN+messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "]: " + ANSI_RESET + messageDTO.getMensagem()+ANSI_RESET);
+        log.info(ANSI_GREEN+messageDTO.getDataCriacao().format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss")) + " [" + messageDTO.getUsuario() + "]: " + ANSI_RESET + messageDTO.getMensagem()+ ANSI_RESET);
 
         log.info("#### offset -> '" + offset + "' key -> '" + key + "' -> Consumed Object message -> '" + message + "'");
     }
 
     //METODOS PRODUTORES
-    public void send(String message, String topic) {
+    public void send(String message, Integer partition) {
         Message<String> builtMessage = MessageBuilder.withPayload(message)//construtor de mensagem setando a mensagem
                 .setHeader(KafkaHeaders.TOPIC, topic)//seta o topico da mensagem
                 .setHeader(KafkaHeaders.MESSAGE_KEY, UUID.randomUUID().toString())//seta a chave da mensagem
+                .setHeader(KafkaHeaders.PARTITION_ID, partition)
                 .build();
 
         ListenableFuture<SendResult<String, String>> future = kafkaTemplate.send(builtMessage);//??
@@ -104,14 +111,14 @@ public class ChatService {
     public void sendMessage(String message, List<NomesChats> destinatarios) throws JsonProcessingException {
         MensagemDTO mensagemDTO = MensagemDTO.builder()
                 .usuario(user)
-                .mensagem(ANSI_CYAN+message+ANSI_RESET)
+                .mensagem(message)
                 .dataCriacao(LocalDateTime.now())
                 .build();
 
         String convertedMessage = objectMapper.writeValueAsString(mensagemDTO);
 
         for(NomesChats nomesChats:destinatarios){
-            this.send(convertedMessage, nomesChats.getNome());
+            this.send(convertedMessage, nomesChats.ordinal());
         }
     }
 
